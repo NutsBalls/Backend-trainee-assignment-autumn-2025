@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/repository/postgres/sqlc"
-	interfaces "github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/repository"
+	"github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/repository"
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
 )
@@ -30,19 +30,19 @@ func NewStore(pool *pgxpool.Pool) *Store {
 	}
 }
 
-func (s *Store) Teams() interfaces.TeamRepository {
+func (s *Store) Teams() repository.TeamRepository {
 	return s.teamRepo
 }
 
-func (s *Store) Users() interfaces.UserRepository {
+func (s *Store) Users() repository.UserRepository {
 	return s.userRepo
 }
 
-func (s *Store) PullRequests() interfaces.PRRepository {
+func (s *Store) PullRequests() repository.PRRepository {
 	return s.prRepo
 }
 
-func (s *Store) Reviewers() interfaces.ReviewerRepository {
+func (s *Store) Reviewers() repository.ReviewerRepository {
 	return s.reviewerRepo
 }
 

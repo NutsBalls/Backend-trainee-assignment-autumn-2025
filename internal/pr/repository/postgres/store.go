@@ -1,0 +1,78 @@
+package postgres
+
+import (
+	"context"
+	"fmt"
+
+	"github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/repository/postgres/sqlc"
+	interfaces "github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/repository"
+	"github.com/jackc/pgx/v5"
+	"github.com/jackc/pgx/v5/pgxpool"
+)
+
+type Store struct {
+	pool         *pgxpool.Pool
+	teamRepo     *TeamRepository
+	userRepo     *UserRepository
+	prRepo       *PRRepository
+	reviewerRepo *ReviewerRepository
+}
+
+func NewStore(pool *pgxpool.Pool) *Store {
+	queries := sqlc.New(pool)
+
+	return &Store{
+		pool:         pool,
+		teamRepo:     NewTeamRepository(queries),
+		userRepo:     NewUserRepository(queries),
+		prRepo:       NewPRRepository(queries),
+		reviewerRepo: NewReviewerRepository(queries),
+	}
+}
+
+func (s *Store) Teams() interfaces.TeamRepository {
+	return s.teamRepo
+}
+
+func (s *Store) Users() interfaces.UserRepository {
+	return s.userRepo
+}
+
+func (s *Store) PullRequests() interfaces.PRRepository {
+	return s.prRepo
+}
+
+func (s *Store) Reviewers() interfaces.ReviewerRepository {
+	return s.reviewerRepo
+}
+
+func (s *Store) WithinTransaction(ctx context.Context, fn func(ctx context.Context) error) error {
+	tx, err := s.pool.Begin(ctx)
+	if err != nil {
+		return fmt.Errorf("begin transaction: %w", err)
+	}
+	defer tx.Rollback(ctx)
+	txCtx := injectTx(ctx, tx)
+
+	if err := fn(txCtx); err != nil {
+		return err
+	}
+	if err := tx.Commit(ctx); err != nil {
+		return fmt.Errorf("commit transaction: %w", err)
+	}
+
+	return nil
+}
+
+type txKey struct{}
+
+func injectTx(ctx context.Context, tx pgx.Tx) context.Context {
+	return context.WithValue(ctx, txKey{}, tx)
+}
+
+func extractTx(ctx context.Context) pgx.Tx {
+	if tx, ok := ctx.Value(txKey{}).(pgx.Tx); ok {
+		return tx
+	}
+	return nil
+}

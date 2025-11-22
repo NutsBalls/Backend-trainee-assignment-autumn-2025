@@ -6,6 +6,7 @@ import (
 	"github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/domain"
 )
 
+//go:generate mockgen -destination=../mocks/mock_pr_repository.go -package=mocks github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/repository PRRepository
 type PRRepository interface {
 	CreatePR(ctx context.Context, pr *domain.PullRequest) error
 	GetPR(ctx context.Context, prID string) (*domain.PullRequest, error)
@@ -15,6 +16,7 @@ type PRRepository interface {
 	GetPRAuthorID(ctx context.Context, prID string) (string, error)
 }
 
+//go:generate mockgen -destination=../mocks/mock_reviewer_repository.go -package=mocks github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/repository ReviewerRepository
 type ReviewerRepository interface {
 	AssignReviewer(ctx context.Context, prID, reviewerID string) error
 	ReplaceReviewer(ctx context.Context, prID, oldReviewerID, newReviewerID string) error

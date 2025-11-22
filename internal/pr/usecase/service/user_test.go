@@ -10,7 +10,7 @@ import (
 	"go.uber.org/mock/gomock"
 
 	"github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/domain"
-	"github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/dto"
+	"github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase"
 	"github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/mocks"
 )
 
@@ -27,7 +27,7 @@ func TestUserService_SetIsActive(t *testing.T) {
 	ctx := context.Background()
 
 	t.Run("success - set user active", func(t *testing.T) {
-		req := dto.SetUserIsActiveRequest{
+		req := usecase.SetUserIsActiveRequest{
 			UserID:   "u1",
 			IsActive: true,
 		}
@@ -54,7 +54,7 @@ func TestUserService_SetIsActive(t *testing.T) {
 	})
 
 	t.Run("success - set user inactive", func(t *testing.T) {
-		req := dto.SetUserIsActiveRequest{
+		req := usecase.SetUserIsActiveRequest{
 			UserID:   "u2",
 			IsActive: false,
 		}
@@ -80,7 +80,7 @@ func TestUserService_SetIsActive(t *testing.T) {
 	})
 
 	t.Run("error - user not found", func(t *testing.T) {
-		req := dto.SetUserIsActiveRequest{
+		req := usecase.SetUserIsActiveRequest{
 			UserID:   "nonexistent",
 			IsActive: false,
 		}
@@ -98,7 +98,7 @@ func TestUserService_SetIsActive(t *testing.T) {
 	})
 
 	t.Run("error - empty user ID", func(t *testing.T) {
-		req := dto.SetUserIsActiveRequest{
+		req := usecase.SetUserIsActiveRequest{
 			UserID:   "",
 			IsActive: true,
 		}
@@ -111,7 +111,7 @@ func TestUserService_SetIsActive(t *testing.T) {
 	})
 
 	t.Run("error - database error", func(t *testing.T) {
-		req := dto.SetUserIsActiveRequest{
+		req := usecase.SetUserIsActiveRequest{
 			UserID:   "u1",
 			IsActive: true,
 		}

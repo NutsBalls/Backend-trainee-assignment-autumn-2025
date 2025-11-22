@@ -11,7 +11,7 @@ import (
 	"go.uber.org/mock/gomock"
 
 	"github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/domain"
-	"github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/dto"
+	"github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase"
 	"github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/mocks"
 )
 
@@ -32,7 +32,7 @@ func TestPRService_CreatePR(t *testing.T) {
 	ctx := context.Background()
 
 	t.Run("success - create PR with 2 reviewers", func(t *testing.T) {
-		req := dto.CreatePRRequest{
+		req := usecase.CreatePRRequest{
 			PullRequestID:   "pr-1001",
 			PullRequestName: "Add authentication",
 			AuthorID:        "u1",
@@ -86,7 +86,7 @@ func TestPRService_CreatePR(t *testing.T) {
 	})
 
 	t.Run("success - create PR with 1 reviewer", func(t *testing.T) {
-		req := dto.CreatePRRequest{
+		req := usecase.CreatePRRequest{
 			PullRequestID:   "pr-1002",
 			PullRequestName: "Fix bug",
 			AuthorID:        "u1",
@@ -125,7 +125,7 @@ func TestPRService_CreatePR(t *testing.T) {
 	})
 
 	t.Run("success - create PR with 0 reviewers", func(t *testing.T) {
-		req := dto.CreatePRRequest{
+		req := usecase.CreatePRRequest{
 			PullRequestID:   "pr-1003",
 			PullRequestName: "Update docs",
 			AuthorID:        "u1",
@@ -163,7 +163,7 @@ func TestPRService_CreatePR(t *testing.T) {
 	})
 
 	t.Run("error - PR already exists", func(t *testing.T) {
-		req := dto.CreatePRRequest{
+		req := usecase.CreatePRRequest{
 			PullRequestID:   "pr-1001",
 			PullRequestName: "Add auth",
 			AuthorID:        "u1",
@@ -179,7 +179,7 @@ func TestPRService_CreatePR(t *testing.T) {
 	})
 
 	t.Run("error - author not found", func(t *testing.T) {
-		req := dto.CreatePRRequest{
+		req := usecase.CreatePRRequest{
 			PullRequestID:   "pr-1001",
 			PullRequestName: "Add auth",
 			AuthorID:        "nonexistent",
@@ -196,7 +196,7 @@ func TestPRService_CreatePR(t *testing.T) {
 	})
 
 	t.Run("error - empty pull request ID", func(t *testing.T) {
-		req := dto.CreatePRRequest{
+		req := usecase.CreatePRRequest{
 			PullRequestID:   "",
 			PullRequestName: "Add auth",
 			AuthorID:        "u1",
@@ -210,7 +210,7 @@ func TestPRService_CreatePR(t *testing.T) {
 	})
 
 	t.Run("error - empty pull request name", func(t *testing.T) {
-		req := dto.CreatePRRequest{
+		req := usecase.CreatePRRequest{
 			PullRequestID:   "pr-1001",
 			PullRequestName: "",
 			AuthorID:        "u1",
@@ -224,7 +224,7 @@ func TestPRService_CreatePR(t *testing.T) {
 	})
 
 	t.Run("error - empty author ID", func(t *testing.T) {
-		req := dto.CreatePRRequest{
+		req := usecase.CreatePRRequest{
 			PullRequestID:   "pr-1001",
 			PullRequestName: "Add auth",
 			AuthorID:        "",
@@ -251,7 +251,7 @@ func TestPRService_MergePR(t *testing.T) {
 	ctx := context.Background()
 
 	t.Run("success - merge PR", func(t *testing.T) {
-		req := dto.MergePRRequest{
+		req := usecase.MergePRRequest{
 			PullRequestID: "pr-1001",
 		}
 
@@ -281,7 +281,7 @@ func TestPRService_MergePR(t *testing.T) {
 	})
 
 	t.Run("success - idempotent merge (already merged)", func(t *testing.T) {
-		req := dto.MergePRRequest{
+		req := usecase.MergePRRequest{
 			PullRequestID: "pr-1001",
 		}
 
@@ -304,7 +304,7 @@ func TestPRService_MergePR(t *testing.T) {
 	})
 
 	t.Run("error - PR not found", func(t *testing.T) {
-		req := dto.MergePRRequest{
+		req := usecase.MergePRRequest{
 			PullRequestID: "nonexistent",
 		}
 
@@ -321,7 +321,7 @@ func TestPRService_MergePR(t *testing.T) {
 	})
 
 	t.Run("error - empty pull request ID", func(t *testing.T) {
-		req := dto.MergePRRequest{
+		req := usecase.MergePRRequest{
 			PullRequestID: "",
 		}
 
@@ -350,7 +350,7 @@ func TestPRService_ReassignReviewer(t *testing.T) {
 	ctx := context.Background()
 
 	t.Run("success - reassign reviewer", func(t *testing.T) {
-		req := dto.ReassignReviewerRequest{
+		req := usecase.ReassignReviewerRequest{
 			PullRequestID: "pr-1001",
 			OldReviewerID: "u2",
 		}
@@ -398,7 +398,7 @@ func TestPRService_ReassignReviewer(t *testing.T) {
 	})
 
 	t.Run("error - PR is merged", func(t *testing.T) {
-		req := dto.ReassignReviewerRequest{
+		req := usecase.ReassignReviewerRequest{
 			PullRequestID: "pr-1001",
 			OldReviewerID: "u2",
 		}
@@ -420,7 +420,7 @@ func TestPRService_ReassignReviewer(t *testing.T) {
 	})
 
 	t.Run("error - reviewer not assigned", func(t *testing.T) {
-		req := dto.ReassignReviewerRequest{
+		req := usecase.ReassignReviewerRequest{
 			PullRequestID: "pr-1001",
 			OldReviewerID: "u5",
 		}
@@ -441,7 +441,7 @@ func TestPRService_ReassignReviewer(t *testing.T) {
 	})
 
 	t.Run("error - no candidates available", func(t *testing.T) {
-		req := dto.ReassignReviewerRequest{
+		req := usecase.ReassignReviewerRequest{
 			PullRequestID: "pr-1001",
 			OldReviewerID: "u2",
 		}
@@ -475,7 +475,7 @@ func TestPRService_ReassignReviewer(t *testing.T) {
 	})
 
 	t.Run("error - PR not found", func(t *testing.T) {
-		req := dto.ReassignReviewerRequest{
+		req := usecase.ReassignReviewerRequest{
 			PullRequestID: "nonexistent",
 			OldReviewerID: "u2",
 		}
@@ -490,7 +490,7 @@ func TestPRService_ReassignReviewer(t *testing.T) {
 	})
 
 	t.Run("error - empty pull request ID", func(t *testing.T) {
-		req := dto.ReassignReviewerRequest{
+		req := usecase.ReassignReviewerRequest{
 			PullRequestID: "",
 			OldReviewerID: "u2",
 		}
@@ -503,7 +503,7 @@ func TestPRService_ReassignReviewer(t *testing.T) {
 	})
 
 	t.Run("error - empty old reviewer ID", func(t *testing.T) {
-		req := dto.ReassignReviewerRequest{
+		req := usecase.ReassignReviewerRequest{
 			PullRequestID: "pr-1001",
 			OldReviewerID: "",
 		}

@@ -1,4 +1,4 @@
-package dto
+package usecase
 
 import "github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/domain"
 

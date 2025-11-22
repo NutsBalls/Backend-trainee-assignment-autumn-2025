@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/domain"
-	"github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/dto"
+	"github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase"
 	"github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/repository"
 )
 
@@ -17,7 +17,7 @@ func NewTeamService(uow repository.UnitOfWork) *TeamService {
 	return &TeamService{uow: uow}
 }
 
-func (s *TeamService) CreateTeam(ctx context.Context, req dto.CreateTeamRequest) (*domain.Team, error) {
+func (s *TeamService) CreateTeam(ctx context.Context, req usecase.CreateTeamRequest) (*domain.Team, error) {
 	if req.TeamName == "" {
 		return nil, fmt.Errorf("team_name is required")
 	}

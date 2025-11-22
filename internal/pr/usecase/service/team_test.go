@@ -10,7 +10,7 @@ import (
 	"go.uber.org/mock/gomock"
 
 	"github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/domain"
-	"github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/dto"
+	"github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase"
 	"github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/mocks"
 )
 
@@ -29,9 +29,9 @@ func TestTeamService_CreateTeam(t *testing.T) {
 	ctx := context.Background()
 
 	t.Run("success - create team with members", func(t *testing.T) {
-		req := dto.CreateTeamRequest{
+		req := usecase.CreateTeamRequest{
 			TeamName: "backend",
-			Members: []dto.CreateTeamMember{
+			Members: []usecase.CreateTeamMember{
 				{UserID: "u1", Username: "Alice", IsActive: true},
 				{UserID: "u2", Username: "Bob", IsActive: true},
 			},
@@ -96,9 +96,9 @@ func TestTeamService_CreateTeam(t *testing.T) {
 	})
 
 	t.Run("error - team already exists", func(t *testing.T) {
-		req := dto.CreateTeamRequest{
+		req := usecase.CreateTeamRequest{
 			TeamName: "backend",
-			Members: []dto.CreateTeamMember{
+			Members: []usecase.CreateTeamMember{
 				{UserID: "u1", Username: "Alice", IsActive: true},
 			},
 		}
@@ -116,9 +116,9 @@ func TestTeamService_CreateTeam(t *testing.T) {
 	})
 
 	t.Run("error - empty team name", func(t *testing.T) {
-		req := dto.CreateTeamRequest{
+		req := usecase.CreateTeamRequest{
 			TeamName: "",
-			Members: []dto.CreateTeamMember{
+			Members: []usecase.CreateTeamMember{
 				{UserID: "u1", Username: "Alice", IsActive: true},
 			},
 		}
@@ -131,9 +131,9 @@ func TestTeamService_CreateTeam(t *testing.T) {
 	})
 
 	t.Run("error - no members", func(t *testing.T) {
-		req := dto.CreateTeamRequest{
+		req := usecase.CreateTeamRequest{
 			TeamName: "backend",
-			Members:  []dto.CreateTeamMember{},
+			Members:  []usecase.CreateTeamMember{},
 		}
 
 		result, err := service.CreateTeam(ctx, req)
@@ -144,9 +144,9 @@ func TestTeamService_CreateTeam(t *testing.T) {
 	})
 
 	t.Run("error - database error on TeamExists", func(t *testing.T) {
-		req := dto.CreateTeamRequest{
+		req := usecase.CreateTeamRequest{
 			TeamName: "backend",
-			Members: []dto.CreateTeamMember{
+			Members: []usecase.CreateTeamMember{
 				{UserID: "u1", Username: "Alice", IsActive: true},
 			},
 		}
@@ -165,9 +165,9 @@ func TestTeamService_CreateTeam(t *testing.T) {
 	})
 
 	t.Run("error - CreateTeam fails in transaction", func(t *testing.T) {
-		req := dto.CreateTeamRequest{
+		req := usecase.CreateTeamRequest{
 			TeamName: "backend",
-			Members: []dto.CreateTeamMember{
+			Members: []usecase.CreateTeamMember{
 				{UserID: "u1", Username: "Alice", IsActive: true},
 			},
 		}
@@ -193,9 +193,9 @@ func TestTeamService_CreateTeam(t *testing.T) {
 	})
 
 	t.Run("error - UpsertUser fails in transaction", func(t *testing.T) {
-		req := dto.CreateTeamRequest{
+		req := usecase.CreateTeamRequest{
 			TeamName: "backend",
-			Members: []dto.CreateTeamMember{
+			Members: []usecase.CreateTeamMember{
 				{UserID: "u1", Username: "Alice", IsActive: true},
 			},
 		}

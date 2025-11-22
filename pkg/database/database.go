@@ -43,21 +43,20 @@ func SetupMigrations(pool *pgxpool.Pool) {
 
 	if _, err := os.Stat(migrationsDir); os.IsNotExist(err) {
 		log.Printf("Migrations directory does not exist at %s, listing current directory:", migrationsDir)
-		
+
 		if files, err := os.ReadDir(wd); err == nil {
 			log.Printf("Files in current directory (%s):", wd)
 			for _, file := range files {
 				log.Printf(" - %s", file.Name())
 			}
 		}
-		
+
 		log.Fatal("Migrations directory not found")
 	}
 
 	db := stdlib.OpenDBFromPool(pool)
 	defer db.Close()
 
-	// Применяем миграции
 	if err := goose.Up(db, migrationsDir); err != nil {
 		log.Fatalf("Failed to apply migrations: %v", err)
 	}

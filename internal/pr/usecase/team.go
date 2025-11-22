@@ -1,4 +1,4 @@
-package dto
+package usecase
 
 type CreateTeamRequest struct {
 	TeamName string

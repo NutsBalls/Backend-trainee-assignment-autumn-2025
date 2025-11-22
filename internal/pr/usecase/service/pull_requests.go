@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/domain"
-	"github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/dto"
+	"github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase"
 	"github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/repository"
 )
 
@@ -17,7 +17,7 @@ func NewPRService(uow repository.UnitOfWork) *PRService {
 	return &PRService{uow: uow}
 }
 
-func (s *PRService) CreatePR(ctx context.Context, req dto.CreatePRRequest) (*domain.PullRequest, error) {
+func (s *PRService) CreatePR(ctx context.Context, req usecase.CreatePRRequest) (*domain.PullRequest, error) {
 	if req.PullRequestID == "" {
 		return nil, fmt.Errorf("pull_request_id is required")
 	}
@@ -79,7 +79,7 @@ func (s *PRService) CreatePR(ctx context.Context, req dto.CreatePRRequest) (*dom
 	return createdPR, nil
 }
 
-func (s *PRService) MergePR(ctx context.Context, req dto.MergePRRequest) (*domain.PullRequest, error) {
+func (s *PRService) MergePR(ctx context.Context, req usecase.MergePRRequest) (*domain.PullRequest, error) {
 	if req.PullRequestID == "" {
 		return nil, fmt.Errorf("pull_request_id is required")
 	}
@@ -92,7 +92,7 @@ func (s *PRService) MergePR(ctx context.Context, req dto.MergePRRequest) (*domai
 	return pr, nil
 }
 
-func (s *PRService) ReassignReviewer(ctx context.Context, req dto.ReassignReviewerRequest) (*dto.ReassignReviewerResponse, error) {
+func (s *PRService) ReassignReviewer(ctx context.Context, req usecase.ReassignReviewerRequest) (*usecase.ReassignReviewerResponse, error) {
 	if req.PullRequestID == "" {
 		return nil, fmt.Errorf("pull_request_id is required")
 	}
@@ -152,7 +152,7 @@ func (s *PRService) ReassignReviewer(ctx context.Context, req dto.ReassignReview
 		return nil, fmt.Errorf("get updated PR: %w", err)
 	}
 
-	return &dto.ReassignReviewerResponse{
+	return &usecase.ReassignReviewerResponse{
 		PullRequest: updatedPR,
 		ReplacedBy:  newReviewerID,
 	}, nil

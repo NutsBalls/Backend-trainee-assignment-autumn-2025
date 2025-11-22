@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/domain"
-	"github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/dto"
+	"github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase"
 	"github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/repository"
 )
 
@@ -17,7 +17,7 @@ func NewUserService(uow repository.UnitOfWork) *UserService {
 	return &UserService{uow: uow}
 }
 
-func (s *UserService) SetIsActive(ctx context.Context, req dto.SetUserIsActiveRequest) (*domain.User, error) {
+func (s *UserService) SetIsActive(ctx context.Context, req usecase.SetUserIsActiveRequest) (*domain.User, error) {
 	if req.UserID == "" {
 		return nil, fmt.Errorf("user_id is required")
 	}

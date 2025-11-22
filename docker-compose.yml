@@ -1,18 +1,22 @@
+version: '3.8'
+
 services:
   db:
-    image: postgres:15
+    image: postgres:15-alpine
     container_name: pr_postgres
+    restart: unless-stopped
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_NAME}
     ports:
-      - "${DB_PORT}:5432"
+      - "${DB_PORT:-5432}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
       interval: 5s
+      timeout: 5s
       retries: 5
 
   app:
@@ -20,14 +24,15 @@ services:
       context: .
       dockerfile: ./docker/Dockerfile
     container_name: pr_app
+    restart: unless-stopped
     depends_on:
       db:
         condition: service_healthy
     environment:
+      APP_PORT: ${APP_PORT:-8080}
       DB_CONN: ${DB_CONN}
-      PORT: ${APP_PORT}
     ports:
-      - "${APP_PORT}:${APP_PORT}"
+      - "${APP_PORT:-8080}:8080"
     command: ["./app"]
 
 volumes:

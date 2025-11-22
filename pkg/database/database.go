@@ -38,7 +38,7 @@ func SetupMigrations(pool *pgxpool.Pool) {
 		log.Fatalf("Failed to get working directory: %v", err)
 	}
 
-	migrationsDir := filepath.Join(wd, "migrations")
+	migrationsDir := filepath.Join(wd, "db", "migrations")
 	log.Printf("Looking for migrations in: %s", migrationsDir)
 
 	if _, err := os.Stat(migrationsDir); os.IsNotExist(err) {

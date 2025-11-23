@@ -3,6 +3,7 @@ package postgres
 import (
 	"context"
 	"fmt"
+	"log"
 
 	"github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/repository/postgres/sqlc"
 	"github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/repository"
@@ -51,7 +52,12 @@ func (s *Store) WithinTransaction(ctx context.Context, fn func(ctx context.Conte
 	if err != nil {
 		return fmt.Errorf("begin transaction: %w", err)
 	}
-	defer tx.Rollback(ctx)
+	defer func() {
+		if err := tx.Rollback(ctx); err != nil && err != pgx.ErrTxClosed {
+			log.Printf("failed to rollback transaction: %v", err)
+		}
+	}()
+
 	txCtx := injectTx(ctx, tx)
 
 	if err := fn(txCtx); err != nil {
@@ -68,11 +74,4 @@ type txKey struct{}
 
 func injectTx(ctx context.Context, tx pgx.Tx) context.Context {
 	return context.WithValue(ctx, txKey{}, tx)
-}
-
-func extractTx(ctx context.Context) pgx.Tx {
-	if tx, ok := ctx.Value(txKey{}).(pgx.Tx); ok {
-		return tx
-	}
-	return nil
 }

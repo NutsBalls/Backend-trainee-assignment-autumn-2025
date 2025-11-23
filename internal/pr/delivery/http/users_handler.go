@@ -35,7 +35,6 @@ func (h *Handler) SetUserIsActive(c echo.Context) error {
 		return mapDomainError(c, err)
 	}
 
-	// 5. Возвращаем ответ
 	response := dto.ToUserResponse(user)
 	return c.JSON(http.StatusOK, response)
 }

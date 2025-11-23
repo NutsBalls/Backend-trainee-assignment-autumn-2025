@@ -31,5 +31,9 @@ func NewRouter(handler *Handler) *echo.Echo {
 	e.POST("/pullRequest/merge", handler.MergePR)
 	e.POST("/pullRequest/reassign", handler.ReassignReviewer)
 
+	e.GET("/stats/users", handler.GetUserStats)
+	e.GET("/stats/prs", handler.GetPRStats)
+	e.GET("/stats/workload", handler.GetReviewerWorkload)
+
 	return e
 }

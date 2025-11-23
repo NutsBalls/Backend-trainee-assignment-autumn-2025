@@ -21,3 +21,9 @@ type TeamUseCase interface {
 type UserUseCase interface {
 	SetIsActive(ctx context.Context, req SetUserIsActiveRequest) (*domain.User, error)
 }
+
+type StatsUseCase interface {
+	GetUserAssignmentStats(ctx context.Context) ([]domain.UserAssignmentStats, error)
+	GetPRStats(ctx context.Context) (*domain.PRStats, error)
+	GetReviewerWorkload(ctx context.Context) ([]domain.ReviewerWorkload, error)
+}

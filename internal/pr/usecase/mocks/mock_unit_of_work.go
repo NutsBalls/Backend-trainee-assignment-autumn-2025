@@ -69,6 +69,20 @@ func (mr *MockUnitOfWorkMockRecorder) Reviewers() *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Reviewers", reflect.TypeOf((*MockUnitOfWork)(nil).Reviewers))
 }
 
+// Stats mocks base method.
+func (m *MockUnitOfWork) Stats() repository.StatsRepository {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Stats")
+	ret0, _ := ret[0].(repository.StatsRepository)
+	return ret0
+}
+
+// Stats indicates an expected call of Stats.
+func (mr *MockUnitOfWorkMockRecorder) Stats() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Stats", reflect.TypeOf((*MockUnitOfWork)(nil).Stats))
+}
+
 // Teams mocks base method.
 func (m *MockUnitOfWork) Teams() repository.TeamRepository {
 	m.ctrl.T.Helper()

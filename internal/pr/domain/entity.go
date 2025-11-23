@@ -37,3 +37,23 @@ type PullRequestShort struct {
 	AuthorID        string
 	Status          PRStatus
 }
+
+type UserAssignmentStats struct {
+	UserID           string
+	Username         string
+	TeamName         string
+	AssignmentsCount int64
+}
+
+type PRStats struct {
+	TotalPRs  int64
+	OpenPRs   int64
+	MergedPRs int64
+}
+
+type ReviewerWorkload struct {
+	UserID       string
+	Username     string
+	TeamName     string
+	OpenPRsCount int64
+}

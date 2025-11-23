@@ -30,9 +30,10 @@ func main() {
 	teamService := service.NewTeamService(store)
 	userService := service.NewUserService(store)
 	prService := service.NewPRService(store)
+	statsService := service.NewStatsService(store.Stats())
 	log.Println("UseCase layer initialized")
 
-	handler := httpDelivery.NewHandler(teamService, userService, prService)
+	handler := httpDelivery.NewHandler(teamService, userService, prService, statsService)
 
 	e := httpDelivery.NewRouter(handler)
 	log.Println("HTTP handlers initialized")

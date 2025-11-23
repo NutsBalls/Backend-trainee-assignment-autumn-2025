@@ -14,4 +14,5 @@ type UnitOfWork interface {
 	Users() UserRepository
 	PullRequests() PRRepository
 	Reviewers() ReviewerRepository
+	Stats() StatsRepository
 }

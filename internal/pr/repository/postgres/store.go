@@ -17,6 +17,7 @@ type Store struct {
 	userRepo     *UserRepository
 	prRepo       *PRRepository
 	reviewerRepo *ReviewerRepository
+	statsRepo    *StatsRepository
 }
 
 func NewStore(pool *pgxpool.Pool) *Store {
@@ -28,6 +29,7 @@ func NewStore(pool *pgxpool.Pool) *Store {
 		userRepo:     NewUserRepository(queries),
 		prRepo:       NewPRRepository(queries),
 		reviewerRepo: NewReviewerRepository(queries),
+		statsRepo:    NewStatsRepository(queries),
 	}
 }
 
@@ -45,6 +47,10 @@ func (s *Store) PullRequests() repository.PRRepository {
 
 func (s *Store) Reviewers() repository.ReviewerRepository {
 	return s.reviewerRepo
+}
+
+func (s *Store) Stats() repository.StatsRepository {
+	return s.statsRepo
 }
 
 func (s *Store) WithinTransaction(ctx context.Context, fn func(ctx context.Context) error) error {

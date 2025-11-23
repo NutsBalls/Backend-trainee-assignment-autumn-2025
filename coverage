@@ -1,6 +1,6 @@
 mode: set
 github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/service/pull_requests.go:16.57,18.2 1 1
-github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/service/pull_requests.go:20.105,21.29 1 1
+github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/service/pull_requests.go:20.109,21.29 1 1
 github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/service/pull_requests.go:21.29,23.3 1 1
 github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/service/pull_requests.go:24.2,24.31 1 1
 github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/service/pull_requests.go:24.31,26.3 1 1
@@ -24,12 +24,12 @@ github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/
 github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/service/pull_requests.go:75.2,75.16 1 1
 github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/service/pull_requests.go:75.16,77.3 1 0
 github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/service/pull_requests.go:79.2,79.23 1 1
-github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/service/pull_requests.go:82.103,83.29 1 1
+github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/service/pull_requests.go:82.107,83.29 1 1
 github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/service/pull_requests.go:83.29,85.3 1 1
 github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/service/pull_requests.go:87.2,88.16 2 1
 github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/service/pull_requests.go:88.16,90.3 1 1
 github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/service/pull_requests.go:92.2,92.16 1 1
-github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/service/pull_requests.go:95.131,96.29 1 1
+github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/service/pull_requests.go:95.139,96.29 1 1
 github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/service/pull_requests.go:96.29,98.3 1 1
 github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/service/pull_requests.go:99.2,99.29 1 1
 github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/service/pull_requests.go:99.29,101.3 1 1
@@ -59,8 +59,12 @@ github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/
 github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/service/pull_requests.go:166.2,167.16 2 1
 github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/service/pull_requests.go:167.16,169.3 1 1
 github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/service/pull_requests.go:171.2,171.17 1 1
+github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/service/stats.go:14.74,18.2 1 1
+github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/service/stats.go:20.106,22.2 1 1
+github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/service/stats.go:24.81,26.2 1 1
+github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/service/stats.go:28.100,30.2 1 1
 github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/service/team.go:16.61,18.2 1 1
-github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/service/team.go:20.104,21.24 1 1
+github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/service/team.go:20.108,21.24 1 1
 github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/service/team.go:21.24,23.3 1 1
 github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/service/team.go:24.2,24.27 1 1
 github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/service/team.go:24.27,26.3 1 1
@@ -86,7 +90,7 @@ github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/
 github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/service/team.go:74.16,76.3 1 1
 github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/service/team.go:78.2,78.18 1 1
 github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/service/users.go:16.61,18.2 1 1
-github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/service/users.go:20.110,21.22 1 1
+github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/service/users.go:20.114,21.22 1 1
 github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/service/users.go:21.22,23.3 1 1
 github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/service/users.go:25.2,26.16 2 1
 github.com/NutsBalls/Backend-trainee-assignment-autumn-2025/internal/pr/usecase/service/users.go:26.16,28.3 1 1

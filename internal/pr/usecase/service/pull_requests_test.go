@@ -159,7 +159,7 @@ func TestPRService_CreatePR(t *testing.T) {
 		result, err := service.CreatePR(ctx, req)
 
 		require.NoError(t, err)
-		assert.Len(t, result.AssignedReviewers, 0)
+		assert.Empty(t, result.AssignedReviewers)
 	})
 
 	t.Run("error - PR already exists", func(t *testing.T) {

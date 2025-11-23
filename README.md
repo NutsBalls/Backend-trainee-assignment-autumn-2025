@@ -13,8 +13,8 @@
 
 - Go 1.25.2
 - PostgreSQL 15
-- Echo (HTTP framework)
-- SQLC (генерация SQL кода)
+- Echo
+- SQLC
 - Docker & Docker Compose
 
 ## Быстрый старт
@@ -66,7 +66,7 @@ GET http://localhost:8080/team/get
 Content-Type: application/json
 ```
 
-### Установка актвиности для пользователя
+### Установка активности для пользователя
 
 **Endpoint:** `POST /users/setIsActive`
 

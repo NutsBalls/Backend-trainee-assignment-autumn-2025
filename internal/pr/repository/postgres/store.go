@@ -2,6 +2,7 @@ package postgres
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"log"
 
@@ -59,7 +60,7 @@ func (s *Store) WithinTransaction(ctx context.Context, fn func(ctx context.Conte
 		return fmt.Errorf("begin transaction: %w", err)
 	}
 	defer func() {
-		if err := tx.Rollback(ctx); err != nil && err != pgx.ErrTxClosed {
+		if err := tx.Rollback(ctx); err != nil && !errors.Is(err, pgx.ErrTxClosed) {
 			log.Printf("failed to rollback transaction: %v", err)
 		}
 	}()

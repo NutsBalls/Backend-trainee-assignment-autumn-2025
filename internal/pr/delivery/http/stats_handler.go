@@ -29,7 +29,7 @@ func (h *Handler) GetUserStats(c echo.Context) error {
 		}
 	}
 
-	return c.JSON(http.StatusOK, map[string]interface{}{
+	return c.JSON(http.StatusOK, map[string]any{
 		"users": out,
 	})
 }
@@ -75,7 +75,7 @@ func (h *Handler) GetReviewerWorkload(c echo.Context) error {
 		}
 	}
 
-	return c.JSON(http.StatusOK, map[string]interface{}{
+	return c.JSON(http.StatusOK, map[string]any{
 		"reviewers": out,
 	})
 }

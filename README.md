@@ -122,3 +122,65 @@ Content-Type: application/json
 GET http://localhost:8080/users/getReview?user_id=u3
 Content-Type: application/json
 ```
+
+## Дополнительно
+### Описал конфигурацию линтера
+Описана в файле `.golangci.yml`
+### Добавил простой эндпоинт статистики
+#### Статистика по пользователям
+
+**Endpoint:** `GET /stats/users`
+
+**Request:**
+```http
+GET http://localhost:8080/stats/users
+Content-Type: application/json
+```
+**Response:**
+```json
+{
+  "users": [
+    {"user_id": "u1", "username": "Alice", "team_name": "backend", "assignments_count": 3},
+    {"user_id": "u2", "username": "Bob", "team_name": "backend", "assignments_count": 2}
+  ]
+}
+```
+
+#### Статистика по PR
+
+**Endpoint:** `GET /stats/prs`
+
+**Request:**
+```http
+GET http://localhost:8080/stats/prs
+Content-Type: application/json
+```
+**Response:**
+```json
+{
+  "total_prs": 5,
+  "open_prs": 2,
+  "merged_prs": 3
+}
+
+```
+#### Статистика по нагрузке ревьюеров
+
+**Endpoint:** `GET /stats/workload`
+
+**Request:**
+```http
+GET http://localhost:8080/stats/workload
+Content-Type: application/json
+```
+
+**Response:**
+```json
+{
+  "reviewers": [
+    {"user_id": "u1", "username": "Alice", "team_name": "backend", "open_prs_count": 2},
+    {"user_id": "u2", "username": "Bob", "team_name": "backend", "open_prs_count": 1}
+  ]
+}
+
+```
